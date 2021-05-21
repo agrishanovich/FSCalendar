@@ -85,6 +85,7 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
 - (void)orientationDidChange:(NSNotification *)notification;
 
 - (CGSize)sizeThatFits:(CGSize)size scope:(FSCalendarScope)scope;
+- (CGSize)sizeThatFits:(CGSize)size scope:(FSCalendarScope)scope page:(NSDate *)page;
 
 - (void)scrollToDate:(NSDate *)date;
 - (void)scrollToDate:(NSDate *)date animated:(BOOL)animated;
@@ -350,6 +351,11 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
 
 - (CGSize)sizeThatFits:(CGSize)size scope:(FSCalendarScope)scope
 {
+    return [self sizeThatFits:size scope:scope page:_currentPage];
+}
+
+- (CGSize)sizeThatFits:(CGSize)size scope:(FSCalendarScope)scope page:(NSDate *)page
+{
     CGFloat headerHeight = self.preferredHeaderHeight;
     CGFloat weekdayHeight = self.preferredWeekdayHeight;
     CGFloat rowHeight = self.preferredRowHeight;
@@ -358,7 +364,7 @@ typedef NS_ENUM(NSUInteger, FSCalendarOrientation) {
     if (!self.floatingMode) {
         switch (scope) {
             case FSCalendarScopeMonth: {
-                CGFloat height = weekdayHeight + headerHeight + [self.calculator numberOfRowsInMonth:_currentPage]*rowHeight + paddings;
+                CGFloat height = weekdayHeight + headerHeight + [self.calculator numberOfRowsInMonth:page]*rowHeight + paddings;
                 return CGSizeMake(size.width, height);
             }
             case FSCalendarScopeWeek: {

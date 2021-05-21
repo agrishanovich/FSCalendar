@@ -44,6 +44,7 @@
 - (void)configureAppearance;
 
 - (CGSize)sizeThatFits:(CGSize)size scope:(FSCalendarScope)scope;
+- (CGSize)sizeThatFits:(CGSize)size scope:(FSCalendarScope)scope page:(NSDate *)targetPage;
 
 @end
 

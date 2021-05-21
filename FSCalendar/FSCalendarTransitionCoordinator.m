@@ -303,11 +303,11 @@
     CGSize contentSize;
     switch (scope) {
         case FSCalendarScopeMonth: {
-            contentSize = self.calendar.adjustsBoundingRectWhenChangingMonths ? [self.calendar sizeThatFits:self.calendar.frame.size scope:scope] : self.cachedMonthSize;
+            contentSize = self.calendar.adjustsBoundingRectWhenChangingMonths ? [self.calendar sizeThatFits:self.calendar.frame.size scope:scope page:page] : self.cachedMonthSize;
             break;
         }
         case FSCalendarScopeWeek: {
-            contentSize = [self.calendar sizeThatFits:self.calendar.frame.size scope:scope];
+            contentSize = [self.calendar sizeThatFits:self.calendar.frame.size scope:scope page:page];
             break;
         }
     }
